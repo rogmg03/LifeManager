@@ -14,6 +14,7 @@ appsettings.Production.json
 ## Logs
 logs/
 *.log
+{{*
 
 ## File uploads
 uploads/
