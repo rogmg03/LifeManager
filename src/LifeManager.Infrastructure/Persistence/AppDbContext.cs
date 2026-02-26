@@ -30,6 +30,10 @@ public class AppDbContext : DbContext
     public DbSet<ProjectLabel> ProjectLabels => Set<ProjectLabel>();
     public DbSet<TaskLabel> TaskLabels => Set<TaskLabel>();
 
+    // Cycle 7
+    public DbSet<Document> Documents => Set<Document>();
+    public DbSet<Attachment> Attachments => Set<Attachment>();
+
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
         modelBuilder.ApplyConfigurationsFromAssembly(typeof(AppDbContext).Assembly);

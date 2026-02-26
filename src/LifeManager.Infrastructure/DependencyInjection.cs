@@ -52,11 +52,18 @@ public static class DependencyInjection
         // Cycle 6
         services.AddScoped<ILabelRepository, LabelRepository>();
 
+        // Cycle 7
+        services.AddScoped<IDocumentRepository, DocumentRepository>();
+        services.AddScoped<IAttachmentRepository, AttachmentRepository>();
+
         // Cycle 1 — Services
         services.AddScoped<IJwtTokenGenerator, JwtTokenGenerator>();
         services.AddScoped<IGoogleAuthService, GoogleAuthService>();
         services.AddHttpContextAccessor();
         services.AddScoped<ICurrentUserService, CurrentUserService>();
+
+        // Cycle 7 — Services
+        services.AddScoped<IFileStorageService, FileStorageService>();
 
         return services;
     }

@@ -22,6 +22,10 @@ public interface IUnitOfWork : IDisposable
     // Cycle 6
     ILabelRepository Labels { get; }
 
+    // Cycle 7
+    IDocumentRepository Documents { get; }
+    IAttachmentRepository Attachments { get; }
+
     Task<int> SaveChangesAsync(CancellationToken cancellationToken = default);
     Task BeginTransactionAsync(CancellationToken cancellationToken = default);
     Task CommitTransactionAsync(CancellationToken cancellationToken = default);
