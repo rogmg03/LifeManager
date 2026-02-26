@@ -56,6 +56,9 @@ public static class DependencyInjection
         services.AddScoped<IDocumentRepository, DocumentRepository>();
         services.AddScoped<IAttachmentRepository, AttachmentRepository>();
 
+        // Cycle 8
+        services.AddScoped<IActivityEntryRepository, ActivityEntryRepository>();
+
         // Cycle 1 — Services
         services.AddScoped<IJwtTokenGenerator, JwtTokenGenerator>();
         services.AddScoped<IGoogleAuthService, GoogleAuthService>();

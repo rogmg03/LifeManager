@@ -19,7 +19,8 @@ public class UnitOfWork : IUnitOfWork
         IRecurrenceRuleRepository recurrenceRules,
         ILabelRepository labels,
         IDocumentRepository documents,
-        IAttachmentRepository attachments)
+        IAttachmentRepository attachments,
+        IActivityEntryRepository activityEntries)
     {
         _context = context;
         Users = users;
@@ -32,6 +33,7 @@ public class UnitOfWork : IUnitOfWork
         Labels = labels;
         Documents = documents;
         Attachments = attachments;
+        ActivityEntries = activityEntries;
     }
 
     // Cycle 1
@@ -57,6 +59,9 @@ public class UnitOfWork : IUnitOfWork
     // Cycle 7
     public IDocumentRepository Documents { get; }
     public IAttachmentRepository Attachments { get; }
+
+    // Cycle 8
+    public IActivityEntryRepository ActivityEntries { get; }
 
     public async Task<int> SaveChangesAsync(CancellationToken cancellationToken = default)
         => await _context.SaveChangesAsync(cancellationToken);

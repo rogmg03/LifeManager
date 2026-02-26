@@ -34,6 +34,9 @@ public class AppDbContext : DbContext
     public DbSet<Document> Documents => Set<Document>();
     public DbSet<Attachment> Attachments => Set<Attachment>();
 
+    // Cycle 8
+    public DbSet<ActivityEntry> ActivityEntries => Set<ActivityEntry>();
+
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
         modelBuilder.ApplyConfigurationsFromAssembly(typeof(AppDbContext).Assembly);
