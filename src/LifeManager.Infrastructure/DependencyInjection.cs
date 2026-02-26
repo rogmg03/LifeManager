@@ -62,6 +62,10 @@ public static class DependencyInjection
         // Cycle 9
         services.AddScoped<ITimeEntryRepository, TimeEntryRepository>();
 
+        // Cycle 10
+        services.AddScoped<IFreeTimeTransactionRepository, FreeTimeTransactionRepository>();
+        services.AddScoped<IFreeTimeRatioRepository, FreeTimeRatioRepository>();
+
         // Cycle 1 — Services
         services.AddScoped<IJwtTokenGenerator, JwtTokenGenerator>();
         services.AddScoped<IGoogleAuthService, GoogleAuthService>();
@@ -70,6 +74,9 @@ public static class DependencyInjection
 
         // Cycle 7 — Services
         services.AddScoped<IFileStorageService, FileStorageService>();
+
+        // Cycle 10 — Services
+        services.AddScoped<IFreeTimeCalculator, FreeTimeCalculator>();
 
         return services;
     }

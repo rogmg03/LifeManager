@@ -40,6 +40,10 @@ public class AppDbContext : DbContext
     // Cycle 9
     public DbSet<TimeEntry> TimeEntries => Set<TimeEntry>();
 
+    // Cycle 10
+    public DbSet<FreeTimeTransaction> FreeTimeTransactions => Set<FreeTimeTransaction>();
+    public DbSet<FreeTimeRatio> FreeTimeRatios => Set<FreeTimeRatio>();
+
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
         modelBuilder.ApplyConfigurationsFromAssembly(typeof(AppDbContext).Assembly);

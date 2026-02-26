@@ -31,5 +31,11 @@ public class TimeEntryConfiguration : IEntityTypeConfiguration<TimeEntry>
             .WithMany()
             .HasForeignKey(te => te.UserId)
             .OnDelete(DeleteBehavior.Restrict);
+
+        // Cycle 10 — nullable FK to FreeTimeTransaction (set by event handler after earn)
+        builder.HasOne(te => te.EarnedTransaction)
+            .WithMany()
+            .HasForeignKey(te => te.EarnedTransactionId)
+            .OnDelete(DeleteBehavior.SetNull);
     }
 }

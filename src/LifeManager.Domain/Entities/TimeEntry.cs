@@ -10,7 +10,11 @@ public class TimeEntry : BaseEntity
     public string? Notes { get; set; }
     public bool IsManual { get; set; }
 
+    // Set by Cycle 10 event handler after FreeTimeTransaction is created
+    public Guid? EarnedTransactionId { get; set; }
+
     // Navigation
     public ProjectTask Task { get; set; } = null!;
     public User User { get; set; } = null!;
+    public FreeTimeTransaction? EarnedTransaction { get; set; }
 }

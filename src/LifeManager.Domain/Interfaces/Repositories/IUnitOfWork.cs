@@ -32,6 +32,10 @@ public interface IUnitOfWork : IDisposable
     // Cycle 9
     ITimeEntryRepository TimeEntries { get; }
 
+    // Cycle 10
+    IFreeTimeTransactionRepository FreeTimeTransactions { get; }
+    IFreeTimeRatioRepository FreeTimeRatios { get; }
+
     Task<int> SaveChangesAsync(CancellationToken cancellationToken = default);
     Task BeginTransactionAsync(CancellationToken cancellationToken = default);
     Task CommitTransactionAsync(CancellationToken cancellationToken = default);
