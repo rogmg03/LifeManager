@@ -20,6 +20,11 @@ public class AppDbContext : DbContext
     // Cycle 4
     public DbSet<Phase> Phases => Set<Phase>();
 
+    // Cycle 5
+    public DbSet<ProjectTask> Tasks => Set<ProjectTask>();
+    public DbSet<Subtask> Subtasks => Set<Subtask>();
+    public DbSet<RecurrenceRule> RecurrenceRules => Set<RecurrenceRule>();
+
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
         modelBuilder.ApplyConfigurationsFromAssembly(typeof(AppDbContext).Assembly);

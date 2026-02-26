@@ -14,6 +14,11 @@ public interface IUnitOfWork : IDisposable
     // Cycle 4
     IPhaseRepository Phases { get; }
 
+    // Cycle 5
+    IProjectTaskRepository Tasks { get; }
+    ISubtaskRepository Subtasks { get; }
+    IRecurrenceRuleRepository RecurrenceRules { get; }
+
     Task<int> SaveChangesAsync(CancellationToken cancellationToken = default);
     Task BeginTransactionAsync(CancellationToken cancellationToken = default);
     Task CommitTransactionAsync(CancellationToken cancellationToken = default);
