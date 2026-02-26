@@ -1,0 +1,27 @@
+## .NET
+bin/
+obj/
+*.user
+*.suo
+.vs/
+*.swp
+
+## Secrets / env
+appsettings.Production.json
+*.env
+.env
+
+## Logs
+logs/
+*.log
+
+## File uploads
+uploads/
+
+## NuGet
+*.nupkg
+.nuget/
+
+## OS
+.DS_Store
+Thumbs.db
