@@ -8,6 +8,9 @@ public interface IUnitOfWork : IDisposable
     // Cycle 2
     IClientRepository Clients { get; }
 
+    // Cycle 3
+    IProjectRepository Projects { get; }
+
     Task<int> SaveChangesAsync(CancellationToken cancellationToken = default);
     Task BeginTransactionAsync(CancellationToken cancellationToken = default);
     Task CommitTransactionAsync(CancellationToken cancellationToken = default);
