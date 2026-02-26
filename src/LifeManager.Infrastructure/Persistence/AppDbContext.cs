@@ -17,6 +17,9 @@ public class AppDbContext : DbContext
     // Cycle 3
     public DbSet<Project> Projects => Set<Project>();
 
+    // Cycle 4
+    public DbSet<Phase> Phases => Set<Phase>();
+
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
         modelBuilder.ApplyConfigurationsFromAssembly(typeof(AppDbContext).Assembly);

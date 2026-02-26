@@ -11,6 +11,9 @@ public interface IUnitOfWork : IDisposable
     // Cycle 3
     IProjectRepository Projects { get; }
 
+    // Cycle 4
+    IPhaseRepository Phases { get; }
+
     Task<int> SaveChangesAsync(CancellationToken cancellationToken = default);
     Task BeginTransactionAsync(CancellationToken cancellationToken = default);
     Task CommitTransactionAsync(CancellationToken cancellationToken = default);

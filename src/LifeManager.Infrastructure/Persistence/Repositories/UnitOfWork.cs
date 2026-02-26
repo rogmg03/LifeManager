@@ -8,12 +8,18 @@ public class UnitOfWork : IUnitOfWork
     private readonly AppDbContext _context;
     private IDbContextTransaction? _transaction;
 
-    public UnitOfWork(AppDbContext context, IUserRepository users, IClientRepository clients, IProjectRepository projects)
+    public UnitOfWork(
+        AppDbContext context,
+        IUserRepository users,
+        IClientRepository clients,
+        IProjectRepository projects,
+        IPhaseRepository phases)
     {
         _context = context;
         Users = users;
         Clients = clients;
         Projects = projects;
+        Phases = phases;
     }
 
     // Cycle 1
@@ -24,6 +30,9 @@ public class UnitOfWork : IUnitOfWork
 
     // Cycle 3
     public IProjectRepository Projects { get; }
+
+    // Cycle 4
+    public IPhaseRepository Phases { get; }
 
     public async Task<int> SaveChangesAsync(CancellationToken cancellationToken = default)
         => await _context.SaveChangesAsync(cancellationToken);
