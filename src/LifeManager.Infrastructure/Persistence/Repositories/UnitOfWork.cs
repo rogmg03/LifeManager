@@ -20,7 +20,8 @@ public class UnitOfWork : IUnitOfWork
         ILabelRepository labels,
         IDocumentRepository documents,
         IAttachmentRepository attachments,
-        IActivityEntryRepository activityEntries)
+        IActivityEntryRepository activityEntries,
+        ITimeEntryRepository timeEntries)
     {
         _context = context;
         Users = users;
@@ -34,6 +35,7 @@ public class UnitOfWork : IUnitOfWork
         Documents = documents;
         Attachments = attachments;
         ActivityEntries = activityEntries;
+        TimeEntries = timeEntries;
     }
 
     // Cycle 1
@@ -62,6 +64,9 @@ public class UnitOfWork : IUnitOfWork
 
     // Cycle 8
     public IActivityEntryRepository ActivityEntries { get; }
+
+    // Cycle 9
+    public ITimeEntryRepository TimeEntries { get; }
 
     public async Task<int> SaveChangesAsync(CancellationToken cancellationToken = default)
         => await _context.SaveChangesAsync(cancellationToken);

@@ -54,6 +54,15 @@ public class ExceptionHandlingMiddleware
                     Title = "Validation Failed"
                 }),
 
+            ConflictException conflict => (
+                StatusCodes.Status409Conflict,
+                new ProblemDetails
+                {
+                    Status = StatusCodes.Status409Conflict,
+                    Title = "Conflict",
+                    Detail = conflict.Message
+                }),
+
             UnauthorizedAccessException => (
                 StatusCodes.Status401Unauthorized,
                 new ProblemDetails

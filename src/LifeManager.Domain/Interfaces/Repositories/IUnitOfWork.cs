@@ -29,6 +29,9 @@ public interface IUnitOfWork : IDisposable
     // Cycle 8
     IActivityEntryRepository ActivityEntries { get; }
 
+    // Cycle 9
+    ITimeEntryRepository TimeEntries { get; }
+
     Task<int> SaveChangesAsync(CancellationToken cancellationToken = default);
     Task BeginTransactionAsync(CancellationToken cancellationToken = default);
     Task CommitTransactionAsync(CancellationToken cancellationToken = default);

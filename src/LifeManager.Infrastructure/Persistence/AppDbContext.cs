@@ -37,6 +37,9 @@ public class AppDbContext : DbContext
     // Cycle 8
     public DbSet<ActivityEntry> ActivityEntries => Set<ActivityEntry>();
 
+    // Cycle 9
+    public DbSet<TimeEntry> TimeEntries => Set<TimeEntry>();
+
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
         modelBuilder.ApplyConfigurationsFromAssembly(typeof(AppDbContext).Assembly);
