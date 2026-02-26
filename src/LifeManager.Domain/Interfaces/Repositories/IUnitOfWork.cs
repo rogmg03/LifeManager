@@ -19,6 +19,9 @@ public interface IUnitOfWork : IDisposable
     ISubtaskRepository Subtasks { get; }
     IRecurrenceRuleRepository RecurrenceRules { get; }
 
+    // Cycle 6
+    ILabelRepository Labels { get; }
+
     Task<int> SaveChangesAsync(CancellationToken cancellationToken = default);
     Task BeginTransactionAsync(CancellationToken cancellationToken = default);
     Task CommitTransactionAsync(CancellationToken cancellationToken = default);

@@ -25,6 +25,11 @@ public class AppDbContext : DbContext
     public DbSet<Subtask> Subtasks => Set<Subtask>();
     public DbSet<RecurrenceRule> RecurrenceRules => Set<RecurrenceRule>();
 
+    // Cycle 6
+    public DbSet<Label> Labels => Set<Label>();
+    public DbSet<ProjectLabel> ProjectLabels => Set<ProjectLabel>();
+    public DbSet<TaskLabel> TaskLabels => Set<TaskLabel>();
+
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
         modelBuilder.ApplyConfigurationsFromAssembly(typeof(AppDbContext).Assembly);

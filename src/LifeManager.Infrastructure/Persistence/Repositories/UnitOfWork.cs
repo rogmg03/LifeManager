@@ -16,7 +16,8 @@ public class UnitOfWork : IUnitOfWork
         IPhaseRepository phases,
         IProjectTaskRepository tasks,
         ISubtaskRepository subtasks,
-        IRecurrenceRuleRepository recurrenceRules)
+        IRecurrenceRuleRepository recurrenceRules,
+        ILabelRepository labels)
     {
         _context = context;
         Users = users;
@@ -26,6 +27,7 @@ public class UnitOfWork : IUnitOfWork
         Tasks = tasks;
         Subtasks = subtasks;
         RecurrenceRules = recurrenceRules;
+        Labels = labels;
     }
 
     // Cycle 1
@@ -44,6 +46,9 @@ public class UnitOfWork : IUnitOfWork
     public IProjectTaskRepository Tasks { get; }
     public ISubtaskRepository Subtasks { get; }
     public IRecurrenceRuleRepository RecurrenceRules { get; }
+
+    // Cycle 6
+    public ILabelRepository Labels { get; }
 
     public async Task<int> SaveChangesAsync(CancellationToken cancellationToken = default)
         => await _context.SaveChangesAsync(cancellationToken);
