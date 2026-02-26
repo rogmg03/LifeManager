@@ -1,3 +1,4 @@
+using LifeManager.Domain.Entities;
 using Microsoft.EntityFrameworkCore;
 
 namespace LifeManager.Infrastructure.Persistence;
@@ -6,7 +7,9 @@ public class AppDbContext : DbContext
 {
     public AppDbContext(DbContextOptions<AppDbContext> options) : base(options) { }
 
-    // DbSets added per cycle
+    // Cycle 1
+    public DbSet<User> Users => Set<User>();
+    public DbSet<UserSettings> UserSettings => Set<UserSettings>();
 
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {

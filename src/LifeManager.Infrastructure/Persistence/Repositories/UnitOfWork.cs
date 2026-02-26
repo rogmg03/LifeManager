@@ -8,12 +8,14 @@ public class UnitOfWork : IUnitOfWork
     private readonly AppDbContext _context;
     private IDbContextTransaction? _transaction;
 
-    public UnitOfWork(AppDbContext context)
+    public UnitOfWork(AppDbContext context, IUserRepository users)
     {
         _context = context;
+        Users = users;
     }
 
-    // Repository properties added per cycle
+    // Cycle 1
+    public IUserRepository Users { get; }
 
     public async Task<int> SaveChangesAsync(CancellationToken cancellationToken = default)
         => await _context.SaveChangesAsync(cancellationToken);

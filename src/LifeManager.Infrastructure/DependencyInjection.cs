@@ -1,7 +1,9 @@
+using LifeManager.Application.Common.Interfaces;
 using LifeManager.Domain.Interfaces.Repositories;
 using LifeManager.Infrastructure.Persistence;
 using LifeManager.Infrastructure.Persistence.Interceptors;
 using LifeManager.Infrastructure.Persistence.Repositories;
+using LifeManager.Infrastructure.Services;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
@@ -30,7 +32,14 @@ public static class DependencyInjection
         // Unit of Work
         services.AddScoped<IUnitOfWork, UnitOfWork>();
 
-        // Repositories registered per cycle
+        // Cycle 1
+        services.AddScoped<IUserRepository, UserRepository>();
+
+        // Cycle 1 — Services
+        services.AddScoped<IJwtTokenGenerator, JwtTokenGenerator>();
+        services.AddScoped<IGoogleAuthService, GoogleAuthService>();
+        services.AddHttpContextAccessor();
+        services.AddScoped<ICurrentUserService, CurrentUserService>();
 
         return services;
     }
