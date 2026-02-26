@@ -35,6 +35,9 @@ public static class DependencyInjection
         // Cycle 1
         services.AddScoped<IUserRepository, UserRepository>();
 
+        // Cycle 2
+        services.AddScoped<IClientRepository, ClientRepository>();
+
         // Cycle 1 — Services
         services.AddScoped<IJwtTokenGenerator, JwtTokenGenerator>();
         services.AddScoped<IGoogleAuthService, GoogleAuthService>();
