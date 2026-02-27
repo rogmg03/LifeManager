@@ -11,6 +11,7 @@ public class UnitOfWork : IUnitOfWork
     public UnitOfWork(
         AppDbContext context,
         IUserRepository users,
+        IUserSettingsRepository userSettings,
         IClientRepository clients,
         IProjectRepository projects,
         IPhaseRepository phases,
@@ -37,6 +38,7 @@ public class UnitOfWork : IUnitOfWork
     {
         _context = context;
         Users = users;
+        UserSettings = userSettings;
         Clients = clients;
         Projects = projects;
         Phases = phases;
@@ -64,6 +66,7 @@ public class UnitOfWork : IUnitOfWork
 
     // Cycle 1
     public IUserRepository Users { get; }
+    public IUserSettingsRepository UserSettings { get; }
 
     // Cycle 2
     public IClientRepository Clients { get; }

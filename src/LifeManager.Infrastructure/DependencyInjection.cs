@@ -34,6 +34,7 @@ public static class DependencyInjection
 
         // Cycle 1
         services.AddScoped<IUserRepository, UserRepository>();
+        services.AddScoped<IUserSettingsRepository, UserSettingsRepository>();
 
         // Cycle 2
         services.AddScoped<IClientRepository, ClientRepository>();

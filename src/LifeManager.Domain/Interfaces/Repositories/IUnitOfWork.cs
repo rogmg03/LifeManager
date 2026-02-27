@@ -4,6 +4,7 @@ public interface IUnitOfWork : IDisposable
 {
     // Cycle 1
     IUserRepository Users { get; }
+    IUserSettingsRepository UserSettings { get; }
 
     // Cycle 2
     IClientRepository Clients { get; }
