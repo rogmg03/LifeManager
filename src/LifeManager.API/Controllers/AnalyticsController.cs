@@ -32,13 +32,10 @@ public class AnalyticsController : ControllerBase
         return result is null ? NotFound() : Ok(result);
     }
 
-    // GET /api/analytics/exercise?projectId=
+    // GET /api/analytics/exercise
     [HttpGet("api/analytics/exercise")]
-    public async Task<IActionResult> GetExercise([FromQuery] Guid projectId, CancellationToken ct = default)
-    {
-        var result = await _analyticsReadService.GetExerciseAsync(_currentUserService.UserId, projectId, ct);
-        return result is null ? NotFound() : Ok(result);
-    }
+    public async Task<IActionResult> GetExercise(CancellationToken ct = default)
+        => Ok(await _analyticsReadService.GetExerciseAsync(_currentUserService.UserId, ct));
 
     // GET /api/analytics/project-health
     [HttpGet("api/analytics/project-health")]

@@ -115,6 +115,9 @@ public static class DependencyInjection
         // Cycle 21 — Search read service
         services.AddScoped<ISearchReadService, SearchReadService>();
 
+        // Exercise E2 — Workout read service
+        services.AddScoped<IWorkoutReadService, WorkoutReadService>();
+
         // Export service
         services.AddScoped<IExportService, ExportService>();
 

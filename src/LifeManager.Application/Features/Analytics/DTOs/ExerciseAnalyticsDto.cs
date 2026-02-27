@@ -2,11 +2,8 @@ namespace LifeManager.Application.Features.Analytics.DTOs;
 
 public class ExerciseAnalyticsDto
 {
-    public Guid ProjectId { get; set; }
-    public string ProjectName { get; set; } = string.Empty;
-    public int WorkoutLogsThisWeek { get; set; }
-    public IEnumerable<WorkoutWeekDto> WorkoutLogsByWeek { get; set; } = [];
-    public IEnumerable<GoalProgressDto> Goals { get; set; } = [];
+    public int WorkoutSessionsThisWeek { get; set; }
+    public IEnumerable<WorkoutWeekDto> WorkoutSessionsByWeek { get; set; } = [];
 }
 
 public class WorkoutWeekDto

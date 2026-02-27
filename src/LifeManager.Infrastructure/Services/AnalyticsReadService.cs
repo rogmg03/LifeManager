@@ -147,54 +147,27 @@ public class AnalyticsReadService : IAnalyticsReadService
         };
     }
 
-    public async Task<ExerciseAnalyticsDto?> GetExerciseAsync(Guid userId, Guid projectId, CancellationToken ct = default)
+    public async Task<ExerciseAnalyticsDto> GetExerciseAsync(Guid userId, CancellationToken ct = default)
     {
         using var conn = _connectionFactory.CreateConnection();
         var weekStart = DateTime.UtcNow.Date.AddDays(-(int)DateTime.UtcNow.DayOfWeek);
         var twelveWeeksAgo = DateTime.UtcNow.Date.AddDays(-84);
-        var param = new { UserId = userId, ProjectId = projectId, WeekStart = weekStart, TwelveWeeksAgo = twelveWeeksAgo };
-
-        const string projectSql = @"
-            SELECT p.""Id"" AS ""ProjectId"", p.""Name"" AS ""ProjectName""
-            FROM ""Projects"" p
-            WHERE p.""Id"" = @ProjectId AND p.""UserId"" = @UserId;";
+        var param = new { UserId = userId, WeekStart = weekStart, TwelveWeeksAgo = twelveWeeksAgo };
 
         const string thisWeekSql = @"
             SELECT COUNT(*)::int
-            FROM ""WorkoutLogs"" wl
-            WHERE wl.""ProjectId"" = @ProjectId
-              AND wl.""LoggedAt"" >= @WeekStart;";
+            FROM ""WorkoutSessions"" ws
+            WHERE ws.""UserId"" = @UserId
+              AND ws.""StartedAt"" >= @WeekStart;";
 
         const string byWeekSql = @"
-            SELECT DATE_TRUNC('week', wl.""LoggedAt"")::date AS ""WeekStart"",
+            SELECT DATE_TRUNC('week', ws.""StartedAt"")::date AS ""WeekStart"",
                    COUNT(*)::int AS ""Count""
-            FROM ""WorkoutLogs"" wl
-            WHERE wl.""ProjectId"" = @ProjectId
-              AND wl.""LoggedAt"" >= @TwelveWeeksAgo
-            GROUP BY DATE_TRUNC('week', wl.""LoggedAt"")
+            FROM ""WorkoutSessions"" ws
+            WHERE ws.""UserId"" = @UserId
+              AND ws.""StartedAt"" >= @TwelveWeeksAgo
+            GROUP BY DATE_TRUNC('week', ws.""StartedAt"")
             ORDER BY ""WeekStart"";";
-
-        const string goalsSql = @"
-            SELECT
-              eg.""Id"" AS ""GoalId"",
-              eg.""MetricName"",
-              eg.""TargetValue"",
-              eg.""Unit"",
-              eg.""Deadline"",
-              (SELECT pe.""Value"" FROM ""ProgressEntries"" pe
-               WHERE pe.""GoalId"" = eg.""Id""
-               ORDER BY pe.""RecordedAt"" DESC LIMIT 1) AS ""LatestValue"",
-              (SELECT MAX(pe.""Value"") FROM ""ProgressEntries"" pe
-               WHERE pe.""GoalId"" = eg.""Id"") AS ""PersonalBest""
-            FROM ""ExerciseGoals"" eg
-            WHERE eg.""ProjectId"" = @ProjectId
-            ORDER BY eg.""MetricName"";";
-
-        var project = await conn.QueryFirstOrDefaultAsync<(Guid ProjectId, string ProjectName)>(
-            new CommandDefinition(projectSql, param, cancellationToken: ct));
-
-        if (project.ProjectId == Guid.Empty)
-            return null;
 
         var thisWeekCount = await conn.QueryFirstAsync<int>(
             new CommandDefinition(thisWeekSql, param, cancellationToken: ct));
@@ -202,16 +175,10 @@ public class AnalyticsReadService : IAnalyticsReadService
         var byWeek = (await conn.QueryAsync<WorkoutWeekDto>(
             new CommandDefinition(byWeekSql, param, cancellationToken: ct))).ToList();
 
-        var goals = (await conn.QueryAsync<GoalProgressDto>(
-            new CommandDefinition(goalsSql, param, cancellationToken: ct))).ToList();
-
         return new ExerciseAnalyticsDto
         {
-            ProjectId = project.ProjectId,
-            ProjectName = project.ProjectName,
-            WorkoutLogsThisWeek = thisWeekCount,
-            WorkoutLogsByWeek = byWeek,
-            Goals = goals
+            WorkoutSessionsThisWeek = thisWeekCount,
+            WorkoutSessionsByWeek = byWeek
         };
     }
 
