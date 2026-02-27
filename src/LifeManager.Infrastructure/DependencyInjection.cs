@@ -102,6 +102,10 @@ public static class DependencyInjection
         // Cycle 10 — Services
         services.AddScoped<IFreeTimeCalculator, FreeTimeCalculator>();
 
+        // Cycle 18 — Dapper read infrastructure
+        services.AddSingleton<IDbConnectionFactory, NpgsqlConnectionFactory>();
+        services.AddScoped<IDashboardReadService, DashboardReadService>();
+
         return services;
     }
 }
