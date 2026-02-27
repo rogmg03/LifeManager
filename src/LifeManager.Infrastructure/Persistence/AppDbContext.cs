@@ -51,6 +51,9 @@ public class AppDbContext : DbContext
     public DbSet<Reminder> Reminders => Set<Reminder>();
     public DbSet<NotificationLog> NotificationLogs => Set<NotificationLog>();
 
+    // Cycle 13
+    public DbSet<CollegeCourseDetail> CollegeCourseDetails => Set<CollegeCourseDetail>();
+
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
         modelBuilder.ApplyConfigurationsFromAssembly(typeof(AppDbContext).Assembly);

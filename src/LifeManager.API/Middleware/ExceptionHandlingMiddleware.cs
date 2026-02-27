@@ -54,6 +54,15 @@ public class ExceptionHandlingMiddleware
                     Title = "Validation Failed"
                 }),
 
+            BadRequestException badRequest => (
+                StatusCodes.Status400BadRequest,
+                new ProblemDetails
+                {
+                    Status = StatusCodes.Status400BadRequest,
+                    Title = "Bad Request",
+                    Detail = badRequest.Message
+                }),
+
             ConflictException conflict => (
                 StatusCodes.Status409Conflict,
                 new ProblemDetails

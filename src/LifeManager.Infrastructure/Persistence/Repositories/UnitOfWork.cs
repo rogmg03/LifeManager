@@ -26,7 +26,8 @@ public class UnitOfWork : IUnitOfWork
         IFreeTimeRatioRepository freeTimeRatios,
         IScheduleBlockRepository scheduleBlocks,
         IReminderRepository reminders,
-        INotificationLogRepository notificationLogs)
+        INotificationLogRepository notificationLogs,
+        ICollegeCourseDetailRepository collegeCourseDetails)
     {
         _context = context;
         Users = users;
@@ -46,6 +47,7 @@ public class UnitOfWork : IUnitOfWork
         ScheduleBlocks = scheduleBlocks;
         Reminders = reminders;
         NotificationLogs = notificationLogs;
+        CollegeCourseDetails = collegeCourseDetails;
     }
 
     // Cycle 1
@@ -88,6 +90,9 @@ public class UnitOfWork : IUnitOfWork
     // Cycle 12
     public IReminderRepository Reminders { get; }
     public INotificationLogRepository NotificationLogs { get; }
+
+    // Cycle 13
+    public ICollegeCourseDetailRepository CollegeCourseDetails { get; }
 
     public async Task<int> SaveChangesAsync(CancellationToken cancellationToken = default)
         => await _context.SaveChangesAsync(cancellationToken);

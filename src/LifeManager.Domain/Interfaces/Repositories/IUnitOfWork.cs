@@ -43,6 +43,9 @@ public interface IUnitOfWork : IDisposable
     IReminderRepository Reminders { get; }
     INotificationLogRepository NotificationLogs { get; }
 
+    // Cycle 13
+    ICollegeCourseDetailRepository CollegeCourseDetails { get; }
+
     Task<int> SaveChangesAsync(CancellationToken cancellationToken = default);
     Task BeginTransactionAsync(CancellationToken cancellationToken = default);
     Task CommitTransactionAsync(CancellationToken cancellationToken = default);
