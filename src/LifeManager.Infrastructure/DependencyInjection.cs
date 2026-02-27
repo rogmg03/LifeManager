@@ -106,6 +106,9 @@ public static class DependencyInjection
         services.AddSingleton<IDbConnectionFactory, NpgsqlConnectionFactory>();
         services.AddScoped<IDashboardReadService, DashboardReadService>();
 
+        // Cycle 19 — Analytics read service
+        services.AddScoped<IAnalyticsReadService, AnalyticsReadService>();
+
         return services;
     }
 }
