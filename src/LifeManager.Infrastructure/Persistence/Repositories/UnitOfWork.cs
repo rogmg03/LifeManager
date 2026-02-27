@@ -23,7 +23,8 @@ public class UnitOfWork : IUnitOfWork
         IActivityEntryRepository activityEntries,
         ITimeEntryRepository timeEntries,
         IFreeTimeTransactionRepository freeTimeTransactions,
-        IFreeTimeRatioRepository freeTimeRatios)
+        IFreeTimeRatioRepository freeTimeRatios,
+        IScheduleBlockRepository scheduleBlocks)
     {
         _context = context;
         Users = users;
@@ -40,6 +41,7 @@ public class UnitOfWork : IUnitOfWork
         TimeEntries = timeEntries;
         FreeTimeTransactions = freeTimeTransactions;
         FreeTimeRatios = freeTimeRatios;
+        ScheduleBlocks = scheduleBlocks;
     }
 
     // Cycle 1
@@ -75,6 +77,9 @@ public class UnitOfWork : IUnitOfWork
     // Cycle 10
     public IFreeTimeTransactionRepository FreeTimeTransactions { get; }
     public IFreeTimeRatioRepository FreeTimeRatios { get; }
+
+    // Cycle 11
+    public IScheduleBlockRepository ScheduleBlocks { get; }
 
     public async Task<int> SaveChangesAsync(CancellationToken cancellationToken = default)
         => await _context.SaveChangesAsync(cancellationToken);

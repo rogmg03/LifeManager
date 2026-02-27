@@ -13,7 +13,11 @@ public class FreeTimeTransactionConfiguration : IEntityTypeConfiguration<FreeTim
 
         builder.Property(t => t.Type).HasConversion<string>().HasMaxLength(16);
         builder.Property(t => t.Notes).HasColumnType("text");
-        builder.Property(t => t.ScheduleBlockId); // plain column — FK wired in Cycle 11
+        // ScheduleBlock FK — wired in Cycle 11
+        builder.HasOne(t => t.ScheduleBlock)
+            .WithMany()
+            .HasForeignKey(t => t.ScheduleBlockId)
+            .OnDelete(DeleteBehavior.SetNull);
 
         builder.HasIndex(t => t.UserId);
         builder.HasIndex(t => t.CreatedAt);

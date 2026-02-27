@@ -44,6 +44,9 @@ public class AppDbContext : DbContext
     public DbSet<FreeTimeTransaction> FreeTimeTransactions => Set<FreeTimeTransaction>();
     public DbSet<FreeTimeRatio> FreeTimeRatios => Set<FreeTimeRatio>();
 
+    // Cycle 11
+    public DbSet<ScheduleBlock> ScheduleBlocks => Set<ScheduleBlock>();
+
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
         modelBuilder.ApplyConfigurationsFromAssembly(typeof(AppDbContext).Assembly);

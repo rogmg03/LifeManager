@@ -66,6 +66,9 @@ public static class DependencyInjection
         services.AddScoped<IFreeTimeTransactionRepository, FreeTimeTransactionRepository>();
         services.AddScoped<IFreeTimeRatioRepository, FreeTimeRatioRepository>();
 
+        // Cycle 11
+        services.AddScoped<IScheduleBlockRepository, ScheduleBlockRepository>();
+
         // Cycle 1 — Services
         services.AddScoped<IJwtTokenGenerator, JwtTokenGenerator>();
         services.AddScoped<IGoogleAuthService, GoogleAuthService>();

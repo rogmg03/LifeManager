@@ -25,4 +25,5 @@ public class FreeTimeTransaction : BaseEntity
     // Navigation
     public User User { get; set; } = null!;
     public TimeEntry? TimeEntry { get; set; }
+    public ScheduleBlock? ScheduleBlock { get; set; }
 }
