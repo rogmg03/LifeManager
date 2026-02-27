@@ -32,7 +32,9 @@ public class UnitOfWork : IUnitOfWork
         IOnlineCourseDetailRepository onlineCourseDetails,
         IWorkInitiativeDetailRepository workInitiativeDetails,
         IRoutineRepository routines,
-        IWorkoutLogRepository workoutLogs,
+        IRoutineItemRepository routineItems,
+        IWorkoutSessionRepository workoutSessions,
+        IWorkoutSetRepository workoutSets,
         IExerciseGoalRepository exerciseGoals,
         IProgressEntryRepository progressEntries)
     {
@@ -59,7 +61,9 @@ public class UnitOfWork : IUnitOfWork
         OnlineCourseDetails = onlineCourseDetails;
         WorkInitiativeDetails = workInitiativeDetails;
         Routines = routines;
-        WorkoutLogs = workoutLogs;
+        RoutineItems = routineItems;
+        WorkoutSessions = workoutSessions;
+        WorkoutSets = workoutSets;
         ExerciseGoals = exerciseGoals;
         ProgressEntries = progressEntries;
     }
@@ -115,9 +119,11 @@ public class UnitOfWork : IUnitOfWork
     // Cycle 15
     public IWorkInitiativeDetailRepository WorkInitiativeDetails { get; }
 
-    // Cycle 16
+    // Exercise Redesign (E1)
     public IRoutineRepository Routines { get; }
-    public IWorkoutLogRepository WorkoutLogs { get; }
+    public IRoutineItemRepository RoutineItems { get; }
+    public IWorkoutSessionRepository WorkoutSessions { get; }
+    public IWorkoutSetRepository WorkoutSets { get; }
 
     // Cycle 17
     public IExerciseGoalRepository ExerciseGoals { get; }

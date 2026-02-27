@@ -83,9 +83,11 @@ public static class DependencyInjection
         // Cycle 15
         services.AddScoped<IWorkInitiativeDetailRepository, WorkInitiativeDetailRepository>();
 
-        // Cycle 16
+        // Exercise Redesign (E1)
         services.AddScoped<IRoutineRepository, RoutineRepository>();
-        services.AddScoped<IWorkoutLogRepository, WorkoutLogRepository>();
+        services.AddScoped<IRoutineItemRepository, RoutineItemRepository>();
+        services.AddScoped<IWorkoutSessionRepository, WorkoutSessionRepository>();
+        services.AddScoped<IWorkoutSetRepository, WorkoutSetRepository>();
 
         // Cycle 17
         services.AddScoped<IExerciseGoalRepository, ExerciseGoalRepository>();

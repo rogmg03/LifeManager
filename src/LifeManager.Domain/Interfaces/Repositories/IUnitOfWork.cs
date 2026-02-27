@@ -53,9 +53,11 @@ public interface IUnitOfWork : IDisposable
     // Cycle 15
     IWorkInitiativeDetailRepository WorkInitiativeDetails { get; }
 
-    // Cycle 16
+    // Exercise Redesign (E1)
     IRoutineRepository Routines { get; }
-    IWorkoutLogRepository WorkoutLogs { get; }
+    IRoutineItemRepository RoutineItems { get; }
+    IWorkoutSessionRepository WorkoutSessions { get; }
+    IWorkoutSetRepository WorkoutSets { get; }
 
     // Cycle 17
     IExerciseGoalRepository ExerciseGoals { get; }

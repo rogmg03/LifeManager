@@ -13,14 +13,17 @@ public class RoutineConfiguration : IEntityTypeConfiguration<Routine>
 
         builder.Property(r => r.Name).IsRequired().HasMaxLength(256);
         builder.Property(r => r.Description).HasColumnType("text");
-        builder.Property(r => r.DayOfWeek);
+        builder.Property(r => r.EstimatedDurationMinutes);
+        builder.Property(r => r.Category).HasMaxLength(64);
+        builder.Property(r => r.IsArchived).IsRequired().HasDefaultValue(false);
         builder.Property(r => r.SortOrder).IsRequired();
 
-        builder.HasIndex(r => new { r.ProjectId, r.SortOrder });
+        builder.HasIndex(r => new { r.UserId, r.IsArchived });
+        builder.HasIndex(r => new { r.UserId, r.SortOrder });
 
-        builder.HasOne(r => r.Project)
+        builder.HasOne(r => r.User)
             .WithMany()
-            .HasForeignKey(r => r.ProjectId)
+            .HasForeignKey(r => r.UserId)
             .OnDelete(DeleteBehavior.Cascade);
     }
 }
