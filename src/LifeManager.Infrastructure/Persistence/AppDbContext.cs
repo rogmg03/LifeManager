@@ -54,6 +54,9 @@ public class AppDbContext : DbContext
     // Cycle 13
     public DbSet<CollegeCourseDetail> CollegeCourseDetails => Set<CollegeCourseDetail>();
 
+    // Cycle 14
+    public DbSet<OnlineCourseDetail> OnlineCourseDetails => Set<OnlineCourseDetail>();
+
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
         modelBuilder.ApplyConfigurationsFromAssembly(typeof(AppDbContext).Assembly);

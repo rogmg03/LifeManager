@@ -46,6 +46,9 @@ public interface IUnitOfWork : IDisposable
     // Cycle 13
     ICollegeCourseDetailRepository CollegeCourseDetails { get; }
 
+    // Cycle 14
+    IOnlineCourseDetailRepository OnlineCourseDetails { get; }
+
     Task<int> SaveChangesAsync(CancellationToken cancellationToken = default);
     Task BeginTransactionAsync(CancellationToken cancellationToken = default);
     Task CommitTransactionAsync(CancellationToken cancellationToken = default);

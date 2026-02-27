@@ -76,6 +76,9 @@ public static class DependencyInjection
         // Cycle 13
         services.AddScoped<ICollegeCourseDetailRepository, CollegeCourseDetailRepository>();
 
+        // Cycle 14
+        services.AddScoped<IOnlineCourseDetailRepository, OnlineCourseDetailRepository>();
+
         // Cycle 1 — Services
         services.AddScoped<IJwtTokenGenerator, JwtTokenGenerator>();
         services.AddScoped<IGoogleAuthService, GoogleAuthService>();
