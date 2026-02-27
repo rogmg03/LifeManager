@@ -60,6 +60,10 @@ public class AppDbContext : DbContext
     // Cycle 15
     public DbSet<WorkInitiativeDetail> WorkInitiativeDetails => Set<WorkInitiativeDetail>();
 
+    // Cycle 16
+    public DbSet<Routine> Routines => Set<Routine>();
+    public DbSet<WorkoutLog> WorkoutLogs => Set<WorkoutLog>();
+
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
         modelBuilder.ApplyConfigurationsFromAssembly(typeof(AppDbContext).Assembly);
