@@ -28,7 +28,8 @@ public class UnitOfWork : IUnitOfWork
         IReminderRepository reminders,
         INotificationLogRepository notificationLogs,
         ICollegeCourseDetailRepository collegeCourseDetails,
-        IOnlineCourseDetailRepository onlineCourseDetails)
+        IOnlineCourseDetailRepository onlineCourseDetails,
+        IWorkInitiativeDetailRepository workInitiativeDetails)
     {
         _context = context;
         Users = users;
@@ -50,6 +51,7 @@ public class UnitOfWork : IUnitOfWork
         NotificationLogs = notificationLogs;
         CollegeCourseDetails = collegeCourseDetails;
         OnlineCourseDetails = onlineCourseDetails;
+        WorkInitiativeDetails = workInitiativeDetails;
     }
 
     // Cycle 1
@@ -98,6 +100,9 @@ public class UnitOfWork : IUnitOfWork
 
     // Cycle 14
     public IOnlineCourseDetailRepository OnlineCourseDetails { get; }
+
+    // Cycle 15
+    public IWorkInitiativeDetailRepository WorkInitiativeDetails { get; }
 
     public async Task<int> SaveChangesAsync(CancellationToken cancellationToken = default)
         => await _context.SaveChangesAsync(cancellationToken);

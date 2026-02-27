@@ -49,6 +49,9 @@ public interface IUnitOfWork : IDisposable
     // Cycle 14
     IOnlineCourseDetailRepository OnlineCourseDetails { get; }
 
+    // Cycle 15
+    IWorkInitiativeDetailRepository WorkInitiativeDetails { get; }
+
     Task<int> SaveChangesAsync(CancellationToken cancellationToken = default);
     Task BeginTransactionAsync(CancellationToken cancellationToken = default);
     Task CommitTransactionAsync(CancellationToken cancellationToken = default);
