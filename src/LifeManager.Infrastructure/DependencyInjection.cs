@@ -69,6 +69,10 @@ public static class DependencyInjection
         // Cycle 11
         services.AddScoped<IScheduleBlockRepository, ScheduleBlockRepository>();
 
+        // Cycle 12
+        services.AddScoped<IReminderRepository, ReminderRepository>();
+        services.AddScoped<INotificationLogRepository, NotificationLogRepository>();
+
         // Cycle 1 — Services
         services.AddScoped<IJwtTokenGenerator, JwtTokenGenerator>();
         services.AddScoped<IGoogleAuthService, GoogleAuthService>();

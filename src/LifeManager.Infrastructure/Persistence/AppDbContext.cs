@@ -47,6 +47,10 @@ public class AppDbContext : DbContext
     // Cycle 11
     public DbSet<ScheduleBlock> ScheduleBlocks => Set<ScheduleBlock>();
 
+    // Cycle 12
+    public DbSet<Reminder> Reminders => Set<Reminder>();
+    public DbSet<NotificationLog> NotificationLogs => Set<NotificationLog>();
+
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
         modelBuilder.ApplyConfigurationsFromAssembly(typeof(AppDbContext).Assembly);

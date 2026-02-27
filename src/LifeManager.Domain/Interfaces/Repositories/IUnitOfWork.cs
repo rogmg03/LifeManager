@@ -39,6 +39,10 @@ public interface IUnitOfWork : IDisposable
     // Cycle 11
     IScheduleBlockRepository ScheduleBlocks { get; }
 
+    // Cycle 12
+    IReminderRepository Reminders { get; }
+    INotificationLogRepository NotificationLogs { get; }
+
     Task<int> SaveChangesAsync(CancellationToken cancellationToken = default);
     Task BeginTransactionAsync(CancellationToken cancellationToken = default);
     Task CommitTransactionAsync(CancellationToken cancellationToken = default);
