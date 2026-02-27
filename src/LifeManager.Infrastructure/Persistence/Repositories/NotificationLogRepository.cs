@@ -30,4 +30,16 @@ public class NotificationLogRepository : INotificationLogRepository
 
     public async Task AddAsync(NotificationLog log, CancellationToken ct = default)
         => await _context.NotificationLogs.AddAsync(log, ct);
+
+    public async Task<int> GetUnreadCountAsync(Guid userId, CancellationToken ct = default)
+        => await _context.NotificationLogs.CountAsync(n => n.UserId == userId && !n.IsRead, ct);
+
+    public async Task MarkAllAsReadAsync(Guid userId, CancellationToken ct = default)
+        => await _context.NotificationLogs
+            .Where(n => n.UserId == userId && !n.IsRead)
+            .ExecuteUpdateAsync(s => s.SetProperty(n => n.IsRead, true), ct);
+
+    public void Update(NotificationLog log) => _context.NotificationLogs.Update(log);
+
+    public void Delete(NotificationLog log) => _context.NotificationLogs.Remove(log);
 }

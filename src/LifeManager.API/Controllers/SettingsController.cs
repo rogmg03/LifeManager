@@ -1,3 +1,6 @@
+using LifeManager.Application.Features.FreeTimeRatios.Commands;
+using LifeManager.Application.Features.FreeTimeRatios.DTOs;
+using LifeManager.Application.Features.FreeTimeRatios.Queries;
 using LifeManager.Application.Features.Settings.Commands;
 using LifeManager.Application.Features.Settings.DTOs;
 using LifeManager.Application.Features.Settings.Queries;
@@ -29,4 +32,16 @@ public class SettingsController : ControllerBase
             request.TimeZone,
             request.DailyWorkGoalMinutes,
             request.FreeTimeRatioPercent), ct));
+
+    // GET /api/settings/free-time-ratios
+    [HttpGet("api/settings/free-time-ratios")]
+    public async Task<IActionResult> GetFreeTimeRatio(CancellationToken ct)
+        => Ok(await _mediator.Send(new GetFreeTimeRatioQuery(), ct));
+
+    // PUT /api/settings/free-time-ratios
+    [HttpPut("api/settings/free-time-ratios")]
+    public async Task<IActionResult> UpdateFreeTimeRatio(
+        [FromBody] UpdateFreeTimeRatioRequest request,
+        CancellationToken ct)
+        => Ok(await _mediator.Send(new UpdateFreeTimeRatioCommand(request.WorkMinutesPerFreeMinute), ct));
 }
