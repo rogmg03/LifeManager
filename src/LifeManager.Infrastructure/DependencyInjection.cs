@@ -110,6 +110,9 @@ public static class DependencyInjection
         // Cycle 19 — Analytics read service
         services.AddScoped<IAnalyticsReadService, AnalyticsReadService>();
 
+        // Cycle 21 — Search read service
+        services.AddScoped<ISearchReadService, SearchReadService>();
+
         return services;
     }
 }
