@@ -31,7 +31,9 @@ public class UnitOfWork : IUnitOfWork
         IOnlineCourseDetailRepository onlineCourseDetails,
         IWorkInitiativeDetailRepository workInitiativeDetails,
         IRoutineRepository routines,
-        IWorkoutLogRepository workoutLogs)
+        IWorkoutLogRepository workoutLogs,
+        IExerciseGoalRepository exerciseGoals,
+        IProgressEntryRepository progressEntries)
     {
         _context = context;
         Users = users;
@@ -56,6 +58,8 @@ public class UnitOfWork : IUnitOfWork
         WorkInitiativeDetails = workInitiativeDetails;
         Routines = routines;
         WorkoutLogs = workoutLogs;
+        ExerciseGoals = exerciseGoals;
+        ProgressEntries = progressEntries;
     }
 
     // Cycle 1
@@ -111,6 +115,10 @@ public class UnitOfWork : IUnitOfWork
     // Cycle 16
     public IRoutineRepository Routines { get; }
     public IWorkoutLogRepository WorkoutLogs { get; }
+
+    // Cycle 17
+    public IExerciseGoalRepository ExerciseGoals { get; }
+    public IProgressEntryRepository ProgressEntries { get; }
 
     public async Task<int> SaveChangesAsync(CancellationToken cancellationToken = default)
         => await _context.SaveChangesAsync(cancellationToken);

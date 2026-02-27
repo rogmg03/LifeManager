@@ -64,6 +64,10 @@ public class AppDbContext : DbContext
     public DbSet<Routine> Routines => Set<Routine>();
     public DbSet<WorkoutLog> WorkoutLogs => Set<WorkoutLog>();
 
+    // Cycle 17
+    public DbSet<ExerciseGoal> ExerciseGoals => Set<ExerciseGoal>();
+    public DbSet<ProgressEntry> ProgressEntries => Set<ProgressEntry>();
+
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
         modelBuilder.ApplyConfigurationsFromAssembly(typeof(AppDbContext).Assembly);

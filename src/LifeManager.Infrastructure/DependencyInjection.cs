@@ -86,6 +86,10 @@ public static class DependencyInjection
         services.AddScoped<IRoutineRepository, RoutineRepository>();
         services.AddScoped<IWorkoutLogRepository, WorkoutLogRepository>();
 
+        // Cycle 17
+        services.AddScoped<IExerciseGoalRepository, ExerciseGoalRepository>();
+        services.AddScoped<IProgressEntryRepository, ProgressEntryRepository>();
+
         // Cycle 1 — Services
         services.AddScoped<IJwtTokenGenerator, JwtTokenGenerator>();
         services.AddScoped<IGoogleAuthService, GoogleAuthService>();
