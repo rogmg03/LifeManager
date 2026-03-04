@@ -8,7 +8,6 @@ obj/
 
 ## Secrets / env
 appsettings.Development.json
-appsettings.Production.json
 *.env
 .env
 

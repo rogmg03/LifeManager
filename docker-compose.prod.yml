@@ -1,0 +1,67 @@
+services:
+  traefik:
+    image: traefik:v3
+    container_name: traefik
+    restart: unless-stopped
+    ports:
+      - "80:80"
+      - "443:443"
+    volumes:
+      - /var/run/docker.sock:/var/run/docker.sock:ro
+      - ./traefik.yml:/traefik.yml:ro
+      - ./acme.json:/acme.json
+    networks:
+      - web
+
+  db:
+    image: postgres:16
+    container_name: lifemanager-db
+    restart: unless-stopped
+    environment:
+      POSTGRES_DB: ${POSTGRES_DB}
+      POSTGRES_USER: ${POSTGRES_USER}
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD}
+    volumes:
+      - pgdata:/var/lib/postgresql/data
+    networks:
+      - internal
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U ${POSTGRES_USER} -d ${POSTGRES_DB}"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+
+  api:
+    image: ${GHCR_IMAGE}
+    container_name: lifemanager-api
+    restart: unless-stopped
+    depends_on:
+      db:
+        condition: service_healthy
+    environment:
+      ASPNETCORE_ENVIRONMENT: Production
+      ConnectionStrings__DefaultConnection: ${ConnectionStrings__DefaultConnection}
+      Jwt__Secret: ${Jwt__Secret}
+      Jwt__Issuer: ${Jwt__Issuer}
+      Jwt__Audience: ${Jwt__Audience}
+      Google__ClientId: ${Google__ClientId}
+      Google__ClientSecret: ${Google__ClientSecret}
+      AllowedOrigins: ${AllowedOrigins}
+    networks:
+      - web
+      - internal
+    labels:
+      - "traefik.enable=true"
+      - "traefik.http.routers.lifemanager-api.rule=Host(`lifemanager.api.rogermora.com`)"
+      - "traefik.http.routers.lifemanager-api.entrypoints=websecure"
+      - "traefik.http.routers.lifemanager-api.tls.certresolver=letsencrypt"
+      - "traefik.http.services.lifemanager-api.loadbalancer.server.port=8080"
+
+volumes:
+  pgdata:
+
+networks:
+  web:
+    external: true
+  internal:
+    driver: bridge

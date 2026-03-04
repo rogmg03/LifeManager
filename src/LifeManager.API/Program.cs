@@ -2,7 +2,9 @@ using System.Text;
 using LifeManager.Application;
 using LifeManager.Infrastructure;
 using LifeManager.API.Middleware;
+using LifeManager.Infrastructure.Persistence;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.IdentityModel.Tokens;
 using Serilog;
 
@@ -51,6 +53,13 @@ builder.Services.AddCors(options =>
 
 var app = builder.Build();
 
+// Run EF Core migrations at startup
+using (var scope = app.Services.CreateScope())
+{
+    var db = scope.ServiceProvider.GetRequiredService<AppDbContext>();
+    await db.Database.MigrateAsync();
+}
+
 // Middleware pipeline
 app.UseMiddleware<ExceptionHandlingMiddleware>();
 app.UseSerilogRequestLogging();
@@ -61,7 +70,10 @@ if (app.Environment.IsDevelopment())
     app.UseSwaggerUI();
 }
 
-app.UseHttpsRedirection();
+// HTTPS redirect only in dev — Traefik handles TLS termination in production
+if (!app.Environment.IsProduction())
+    app.UseHttpsRedirection();
+
 app.UseCors("AllowFrontend");
 app.UseAuthentication();
 app.UseAuthorization();
