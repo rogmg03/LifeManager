@@ -1,6 +1,8 @@
 using LifeManager.Application.Features.Schedule.Commands;
 using LifeManager.Application.Features.Schedule.DTOs;
 using LifeManager.Application.Features.Schedule.Queries;
+using LifeManager.Application.Features.Scheduler.Commands;
+using LifeManager.Application.Features.Scheduler.Queries;
 using MediatR;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
@@ -67,4 +69,14 @@ public class ScheduleController : ControllerBase
         await _mediator.Send(new DeleteScheduleBlockCommand(id), ct);
         return NoContent();
     }
+
+    // POST /api/schedule/auto-fill?date=2026-03-03
+    [HttpPost("auto-fill")]
+    public async Task<IActionResult> AutoFill([FromQuery] DateOnly date, CancellationToken ct)
+        => Ok(await _mediator.Send(new AutoFillScheduleCommand(date), ct));
+
+    // GET /api/schedule/suggestions
+    [HttpGet("suggestions")]
+    public async Task<IActionResult> GetSuggestions(CancellationToken ct)
+        => Ok(await _mediator.Send(new GetScheduleSuggestionsQuery(), ct));
 }

@@ -128,6 +128,9 @@ public static class DependencyInjection
         // Export service
         services.AddScoped<IExportService, ExportService>();
 
+        // Session 3 — Scheduler service
+        services.AddScoped<ISchedulerService, SchedulerService>();
+
         return services;
     }
 }
