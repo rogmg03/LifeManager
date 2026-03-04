@@ -39,7 +39,8 @@ public class UnitOfWork : IUnitOfWork
         IProgressEntryRepository progressEntries,
         IAssignmentDetailRepository assignmentDetails,
         ICourseModuleRepository courseModules,
-        IDailyGoalRepository dailyGoals)
+        IDailyGoalRepository dailyGoals,
+        IGoogleCalendarSyncRepository googleCalendarSyncs)
     {
         _context = context;
         Users = users;
@@ -72,6 +73,7 @@ public class UnitOfWork : IUnitOfWork
         AssignmentDetails = assignmentDetails;
         CourseModules = courseModules;
         DailyGoals = dailyGoals;
+        GoogleCalendarSyncs = googleCalendarSyncs;
     }
 
     // Cycle 1
@@ -141,6 +143,9 @@ public class UnitOfWork : IUnitOfWork
 
     // Session 2B
     public IDailyGoalRepository DailyGoals { get; }
+
+    // Session 4A
+    public IGoogleCalendarSyncRepository GoogleCalendarSyncs { get; }
 
     public async Task<int> SaveChangesAsync(CancellationToken cancellationToken = default)
         => await _context.SaveChangesAsync(cancellationToken);

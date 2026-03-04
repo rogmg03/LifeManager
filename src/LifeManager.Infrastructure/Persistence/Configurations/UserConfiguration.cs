@@ -33,6 +33,10 @@ public class UserConfiguration : IEntityTypeConfiguration<User>
         builder.Property(u => u.AvatarUrl)
             .HasMaxLength(1024);
 
+        builder.Property(u => u.RefreshToken)
+            .IsRequired(false)
+            .HasMaxLength(512);
+
         builder.HasOne(u => u.Settings)
             .WithOne(s => s.User)
             .HasForeignKey<UserSettings>(s => s.UserId)

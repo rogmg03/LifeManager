@@ -77,6 +77,9 @@ public class AppDbContext : DbContext
     // Session 2B
     public DbSet<DailyGoal> DailyGoals => Set<DailyGoal>();
 
+    // Session 4A
+    public DbSet<GoogleCalendarSync> GoogleCalendarSyncs => Set<GoogleCalendarSync>();
+
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
         modelBuilder.ApplyConfigurationsFromAssembly(typeof(AppDbContext).Assembly);

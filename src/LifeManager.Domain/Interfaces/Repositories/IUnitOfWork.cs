@@ -70,6 +70,9 @@ public interface IUnitOfWork : IDisposable
     // Session 2B
     IDailyGoalRepository DailyGoals { get; }
 
+    // Session 4A
+    IGoogleCalendarSyncRepository GoogleCalendarSyncs { get; }
+
     Task<int> SaveChangesAsync(CancellationToken cancellationToken = default);
     Task BeginTransactionAsync(CancellationToken cancellationToken = default);
     Task CommitTransactionAsync(CancellationToken cancellationToken = default);

@@ -6,6 +6,7 @@ public class User : BaseEntity
     public string Name { get; set; } = string.Empty;
     public string? AvatarUrl { get; set; }
     public string GoogleId { get; set; } = string.Empty;
+    public string? RefreshToken { get; set; }
 
     // Navigation
     public UserSettings? Settings { get; set; }

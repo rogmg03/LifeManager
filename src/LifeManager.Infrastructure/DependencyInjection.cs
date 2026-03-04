@@ -100,9 +100,13 @@ public static class DependencyInjection
         // Session 2B
         services.AddScoped<IDailyGoalRepository, DailyGoalRepository>();
 
+        // Session 4A
+        services.AddScoped<IGoogleCalendarSyncRepository, GoogleCalendarSyncRepository>();
+
         // Cycle 1 — Services
         services.AddScoped<IJwtTokenGenerator, JwtTokenGenerator>();
         services.AddScoped<IGoogleAuthService, GoogleAuthService>();
+        services.AddScoped<IGoogleCalendarService, GoogleCalendarService>(); // Session 4A
         services.AddHttpContextAccessor();
         services.AddScoped<ICurrentUserService, CurrentUserService>();
 
