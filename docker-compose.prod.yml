@@ -1,18 +1,4 @@
 services:
-  traefik:
-    image: traefik:v3
-    container_name: traefik
-    restart: unless-stopped
-    ports:
-      - "80:80"
-      - "443:443"
-    volumes:
-      - /var/run/docker.sock:/var/run/docker.sock:ro
-      - ./traefik.yml:/traefik.yml:ro
-      - ./acme.json:/acme.json
-    networks:
-      - web
-
   db:
     image: postgres:16
     container_name: lifemanager-db
@@ -48,20 +34,14 @@ services:
       Google__ClientSecret: ${Google__ClientSecret}
       AllowedOrigins: ${AllowedOrigins}
     networks:
-      - web
-      - internal
-    labels:
-      - "traefik.enable=true"
-      - "traefik.http.routers.lifemanager-api.rule=Host(`lifemanager.api.rogermora.com`)"
-      - "traefik.http.routers.lifemanager-api.entrypoints=websecure"
-      - "traefik.http.routers.lifemanager-api.tls.certresolver=letsencrypt"
-      - "traefik.http.services.lifemanager-api.loadbalancer.server.port=8080"
+      - apps_web   # shared with Caddy so it can proxy to this container
+      - internal   # private, only for db access
 
 volumes:
   pgdata:
 
 networks:
-  web:
-    external: true
+  apps_web:
+    external: true   # the existing shared network your Caddy uses
   internal:
     driver: bridge
