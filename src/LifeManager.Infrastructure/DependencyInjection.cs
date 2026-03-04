@@ -135,6 +135,10 @@ public static class DependencyInjection
         // Session 3 — Scheduler service
         services.AddScoped<ISchedulerService, SchedulerService>();
 
+        // Session 4B — HttpClient + Google token exchange service
+        services.AddHttpClient();
+        services.AddScoped<IGoogleTokenService, GoogleTokenService>();
+
         return services;
     }
 }
