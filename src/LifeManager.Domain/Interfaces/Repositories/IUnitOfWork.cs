@@ -67,6 +67,9 @@ public interface IUnitOfWork : IDisposable
     IAssignmentDetailRepository AssignmentDetails { get; }
     ICourseModuleRepository CourseModules { get; }
 
+    // Session 2B
+    IDailyGoalRepository DailyGoals { get; }
+
     Task<int> SaveChangesAsync(CancellationToken cancellationToken = default);
     Task BeginTransactionAsync(CancellationToken cancellationToken = default);
     Task CommitTransactionAsync(CancellationToken cancellationToken = default);

@@ -1,9 +1,13 @@
+using LifeManager.Application.Features.DailyGoals.Commands;
+using LifeManager.Application.Features.DailyGoals.DTOs;
+using LifeManager.Application.Features.DailyGoals.Queries;
 using LifeManager.Application.Features.FreeTimeRatios.Commands;
 using LifeManager.Application.Features.FreeTimeRatios.DTOs;
 using LifeManager.Application.Features.FreeTimeRatios.Queries;
 using LifeManager.Application.Features.Settings.Commands;
 using LifeManager.Application.Features.Settings.DTOs;
 using LifeManager.Application.Features.Settings.Queries;
+using LifeManager.Domain.Enums;
 using MediatR;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
@@ -44,4 +48,17 @@ public class SettingsController : ControllerBase
         [FromBody] UpdateFreeTimeRatioRequest request,
         CancellationToken ct)
         => Ok(await _mediator.Send(new UpdateFreeTimeRatioCommand(request.WorkMinutesPerFreeMinute), ct));
+
+    // GET /api/settings/daily-goals
+    [HttpGet("api/settings/daily-goals")]
+    public async Task<IActionResult> GetDailyGoals(CancellationToken ct)
+        => Ok(await _mediator.Send(new GetDailyGoalsQuery(), ct));
+
+    // PUT /api/settings/daily-goals/{category}
+    [HttpPut("api/settings/daily-goals/{category}")]
+    public async Task<IActionResult> UpsertDailyGoal(
+        DailyGoalCategory category,
+        [FromBody] UpsertDailyGoalRequest request,
+        CancellationToken ct)
+        => Ok(await _mediator.Send(new UpsertDailyGoalCommand(category, request.GoalMinutes), ct));
 }

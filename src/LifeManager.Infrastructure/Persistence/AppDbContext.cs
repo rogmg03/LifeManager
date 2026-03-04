@@ -74,6 +74,9 @@ public class AppDbContext : DbContext
     public DbSet<AssignmentDetail> AssignmentDetails => Set<AssignmentDetail>();
     public DbSet<CourseModule> CourseModules => Set<CourseModule>();
 
+    // Session 2B
+    public DbSet<DailyGoal> DailyGoals => Set<DailyGoal>();
+
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
         modelBuilder.ApplyConfigurationsFromAssembly(typeof(AppDbContext).Assembly);

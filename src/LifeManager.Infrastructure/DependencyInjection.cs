@@ -97,6 +97,9 @@ public static class DependencyInjection
         services.AddScoped<IAssignmentDetailRepository, AssignmentDetailRepository>();
         services.AddScoped<ICourseModuleRepository, CourseModuleRepository>();
 
+        // Session 2B
+        services.AddScoped<IDailyGoalRepository, DailyGoalRepository>();
+
         // Cycle 1 — Services
         services.AddScoped<IJwtTokenGenerator, JwtTokenGenerator>();
         services.AddScoped<IGoogleAuthService, GoogleAuthService>();
