@@ -64,7 +64,7 @@ jobs:
           username: ${{ secrets.VPS_USER }}
           key: ${{ secrets.VPS_SSH_KEY }}
           script: |
-            cd /root/apps/lifemanager
+            cd /root/apps/lifemanager/LifeManager
             docker-compose -f docker-compose.prod.yml pull api
             docker-compose -f docker-compose.prod.yml up -d api
             docker image prune -f
