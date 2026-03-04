@@ -70,6 +70,10 @@ public class AppDbContext : DbContext
     public DbSet<ExerciseGoal> ExerciseGoals => Set<ExerciseGoal>();
     public DbSet<ProgressEntry> ProgressEntries => Set<ProgressEntry>();
 
+    // Session 2A
+    public DbSet<AssignmentDetail> AssignmentDetails => Set<AssignmentDetail>();
+    public DbSet<CourseModule> CourseModules => Set<CourseModule>();
+
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
         modelBuilder.ApplyConfigurationsFromAssembly(typeof(AppDbContext).Assembly);

@@ -93,6 +93,10 @@ public static class DependencyInjection
         services.AddScoped<IExerciseGoalRepository, ExerciseGoalRepository>();
         services.AddScoped<IProgressEntryRepository, ProgressEntryRepository>();
 
+        // Session 2A
+        services.AddScoped<IAssignmentDetailRepository, AssignmentDetailRepository>();
+        services.AddScoped<ICourseModuleRepository, CourseModuleRepository>();
+
         // Cycle 1 — Services
         services.AddScoped<IJwtTokenGenerator, JwtTokenGenerator>();
         services.AddScoped<IGoogleAuthService, GoogleAuthService>();

@@ -36,7 +36,9 @@ public class UnitOfWork : IUnitOfWork
         IWorkoutSessionRepository workoutSessions,
         IWorkoutSetRepository workoutSets,
         IExerciseGoalRepository exerciseGoals,
-        IProgressEntryRepository progressEntries)
+        IProgressEntryRepository progressEntries,
+        IAssignmentDetailRepository assignmentDetails,
+        ICourseModuleRepository courseModules)
     {
         _context = context;
         Users = users;
@@ -66,6 +68,8 @@ public class UnitOfWork : IUnitOfWork
         WorkoutSets = workoutSets;
         ExerciseGoals = exerciseGoals;
         ProgressEntries = progressEntries;
+        AssignmentDetails = assignmentDetails;
+        CourseModules = courseModules;
     }
 
     // Cycle 1
@@ -128,6 +132,10 @@ public class UnitOfWork : IUnitOfWork
     // Cycle 17
     public IExerciseGoalRepository ExerciseGoals { get; }
     public IProgressEntryRepository ProgressEntries { get; }
+
+    // Session 2A
+    public IAssignmentDetailRepository AssignmentDetails { get; }
+    public ICourseModuleRepository CourseModules { get; }
 
     public async Task<int> SaveChangesAsync(CancellationToken cancellationToken = default)
         => await _context.SaveChangesAsync(cancellationToken);
