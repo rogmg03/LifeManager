@@ -26,14 +26,14 @@ public class DashboardReadService : IDashboardReadService
             WHERE ""UserId"" = @UserId AND ""Status"" = 'Active';
 
             SELECT COUNT(*)::int
-            FROM ""ProjectTasks"" pt
+            FROM ""Tasks"" pt
             INNER JOIN ""Projects"" p ON p.""Id"" = pt.""ProjectId""
             WHERE p.""UserId"" = @UserId
               AND pt.""CompletedAt"" >= @TodayStart
               AND pt.""CompletedAt"" < @TomorrowStart;
 
             SELECT COUNT(*)::int
-            FROM ""ProjectTasks"" pt
+            FROM ""Tasks"" pt
             INNER JOIN ""Projects"" p ON p.""Id"" = pt.""ProjectId""
             WHERE p.""UserId"" = @UserId
               AND pt.""DueDate"" >= @TodayStart
@@ -46,7 +46,7 @@ public class DashboardReadService : IDashboardReadService
 
             SELECT p.""Name""
             FROM ""TimeEntries"" te
-            INNER JOIN ""ProjectTasks"" pt ON pt.""Id"" = te.""TaskId""
+            INNER JOIN ""Tasks"" pt ON pt.""Id"" = te.""TaskId""
             INNER JOIN ""Projects"" p ON p.""Id"" = pt.""ProjectId""
             WHERE te.""UserId"" = @UserId AND te.""EndedAt"" IS NULL
             LIMIT 1;";
@@ -97,7 +97,7 @@ public class DashboardReadService : IDashboardReadService
 
         const string sql = @"
             SELECT pt.""Id"", pt.""Title"", p.""Name"" AS ""ProjectName"", pt.""DueDate"", pt.""Priority""
-            FROM ""ProjectTasks"" pt
+            FROM ""Tasks"" pt
             INNER JOIN ""Projects"" p ON p.""Id"" = pt.""ProjectId""
             WHERE p.""UserId"" = @UserId
               AND pt.""DueDate"" >= @TodayStart
