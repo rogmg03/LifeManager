@@ -61,6 +61,7 @@ using (var scope = app.Services.CreateScope())
 }
 
 // Middleware pipeline
+app.UseCors("AllowFrontend");
 app.UseMiddleware<ExceptionHandlingMiddleware>();
 app.UseSerilogRequestLogging();
 
@@ -73,8 +74,6 @@ if (app.Environment.IsDevelopment())
 // HTTPS redirect only in dev — Traefik handles TLS termination in production
 if (!app.Environment.IsProduction())
     app.UseHttpsRedirection();
-
-app.UseCors("AllowFrontend");
 app.UseAuthentication();
 app.UseAuthorization();
 app.MapControllers();
