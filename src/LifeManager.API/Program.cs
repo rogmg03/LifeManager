@@ -24,13 +24,12 @@ builder.Services.AddControllers();
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 
-// Prevent .NET from remapping JWT claim names (e.g. "sub" → NameIdentifier)
-JwtSecurityTokenHandler.DefaultInboundClaimTypeMap.Clear();
-
 // JWT Authentication
 builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
     .AddJwtBearer(options =>
     {
+        // Prevent .NET from remapping "sub" → ClaimTypes.NameIdentifier
+        options.MapInboundClaims = false;
         options.TokenValidationParameters = new TokenValidationParameters
         {
             ValidateIssuer = true,
