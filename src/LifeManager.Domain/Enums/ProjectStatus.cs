@@ -1,2 +1,2 @@
 namespace LifeManager.Domain.Enums;
-public enum ProjectStatus { Active = 0, OnHold = 1, Completed = 2, Archived = 3 }
+public enum ProjectStatus { NotStarted = 0, InProgress = 1, OnHold = 2, Completed = 3, Archived = 4 }
