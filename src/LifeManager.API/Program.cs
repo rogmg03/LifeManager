@@ -1,3 +1,4 @@
+using System.IdentityModel.Tokens.Jwt;
 using System.Text;
 using LifeManager.Application;
 using LifeManager.Infrastructure;
@@ -22,6 +23,9 @@ builder.Services.AddInfrastructure(builder.Configuration);
 builder.Services.AddControllers();
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
+
+// Prevent .NET from remapping JWT claim names (e.g. "sub" → NameIdentifier)
+JwtSecurityTokenHandler.DefaultInboundClaimTypeMap.Clear();
 
 // JWT Authentication
 builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
