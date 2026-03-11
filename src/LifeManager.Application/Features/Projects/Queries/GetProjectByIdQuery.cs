@@ -16,6 +16,16 @@ public class GetProjectByIdQueryHandler : IRequestHandler<GetProjectByIdQuery, P
     {
         var project = await _uow.Projects.GetByIdAsync(request.Id, ct)
             ?? throw new NotFoundException("Project", request.Id);
-        return ProjectDto.FromEntity(project);
+
+        var counts = await _uow.Projects.GetTaskCountsAsync([request.Id], ct);
+        counts.TryGetValue(request.Id, out var c);
+
+        return ProjectDto.FromEntity(project) with
+        {
+            TotalTasks = c.TotalTasks,
+            CompletedTasks = c.CompletedTasks,
+            OverdueTasks = c.OverdueTasks,
+            TotalTimeTrackedMinutes = c.TotalTimeTrackedMinutes,
+        };
     }
 }

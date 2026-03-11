@@ -18,6 +18,22 @@ public class GetProjectsQueryHandler : IRequestHandler<GetProjectsQuery, List<Pr
     public async Task<List<ProjectDto>> Handle(GetProjectsQuery request, CancellationToken ct)
     {
         var projects = await _uow.Projects.GetAllByUserIdAsync(_currentUser.UserId, ct);
-        return projects.Select(ProjectDto.FromEntity).ToList();
+        if (!projects.Any()) return [];
+
+        var counts = await _uow.Projects.GetTaskCountsAsync(projects.Select(p => p.Id), ct);
+
+        return projects.Select(p =>
+        {
+            var dto = ProjectDto.FromEntity(p);
+            if (counts.TryGetValue(p.Id, out var c))
+                dto = dto with
+                {
+                    TotalTasks = c.TotalTasks,
+                    CompletedTasks = c.CompletedTasks,
+                    OverdueTasks = c.OverdueTasks,
+                    TotalTimeTrackedMinutes = c.TotalTimeTrackedMinutes,
+                };
+            return dto;
+        }).ToList();
     }
 }

@@ -14,7 +14,11 @@ public record ProjectDto(
     DateOnly? StartDate,
     DateOnly? EndDate,
     DateTime CreatedAt,
-    DateTime UpdatedAt)
+    DateTime UpdatedAt,
+    int TotalTasks = 0,
+    int CompletedTasks = 0,
+    int OverdueTasks = 0,
+    int TotalTimeTrackedMinutes = 0)
 {
     public static ProjectDto FromEntity(Project p) => new(
         p.Id, p.UserId, p.ClientId,

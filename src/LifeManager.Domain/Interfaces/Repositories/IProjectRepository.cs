@@ -10,4 +10,7 @@ public interface IProjectRepository
     Task AddAsync(Project project, CancellationToken ct = default);
     void Update(Project project);
     void Delete(Project project);
+
+    Task<IReadOnlyDictionary<Guid, (int TotalTasks, int CompletedTasks, int OverdueTasks, int TotalTimeTrackedMinutes)>>
+        GetTaskCountsAsync(IEnumerable<Guid> projectIds, CancellationToken ct = default);
 }
