@@ -55,7 +55,7 @@ public class WorkoutReadService : IWorkoutReadService
 
         var now = DateTime.UtcNow;
         var weekStart = now.Date.AddDays(-(int)now.DayOfWeek);
-        var monthStart = new DateTime(now.Year, now.Month, 1);
+        var monthStart = new DateTime(now.Year, now.Month, 1, 0, 0, 0, DateTimeKind.Utc);
 
         const string statsSql = @"
             SELECT
@@ -71,7 +71,7 @@ public class WorkoutReadService : IWorkoutReadService
             cancellationToken: ct));
 
         const string datesSql = @"
-            SELECT DISTINCT DATE_TRUNC('day', ""StartedAt"")::date AS ""Day""
+            SELECT DISTINCT DATE_TRUNC('day', ""StartedAt"")::timestamp AS ""Day""
             FROM ""WorkoutSessions""
             WHERE ""UserId"" = @UserId AND ""CompletedAt"" IS NOT NULL
             ORDER BY ""Day"" DESC";
