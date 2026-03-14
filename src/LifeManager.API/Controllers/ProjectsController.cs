@@ -44,4 +44,11 @@ public class ProjectsController : ControllerBase
         await _mediator.Send(new DeleteProjectCommand(id), ct);
         return NoContent();
     }
+
+    [HttpDelete("{id:guid}/permanent")]
+    public async Task<IActionResult> PermanentDelete(Guid id, CancellationToken ct)
+    {
+        await _mediator.Send(new PermanentDeleteProjectCommand(id), ct);
+        return NoContent();
+    }
 }
